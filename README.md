@@ -1,24 +1,57 @@
-# README
+# users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column     | Type     | Options     |
+| ---------- | ------   | ----------- |
+| nickname   | string   | null: false |
+| email      | string   | null: false |
+| password   | string   | null: false |
+| last_name  | string   | null: false |
+| first_name | string   | null: false |
+| birthday   | datetime | null: false |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :products
+- has_many :prototypes
 
-* System dependencies
+## products テーブル
 
-* Configuration
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| title      | string     | null: false,                   |
+| price      | integer    | null: false,                   |
+| category   | text       | null: false,                   |
+| status     | string     | null: false,                   |
+| user       | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to :users
+- has_many   :comments
+- has_one    :delivers
 
-* How to run the test suite
+## deliverys テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column | Type   | Options      |
+| ------ | ------ | ------------ |
+| fee    | string | null: false, | # integerかな？
+| area   | string | null: false, |
+| date   | string | null: false, | # datetimeかな？
 
-* Deployment instructions
+### Association
 
-* ...
+- belongs_to :products
+
+## comments テーブル
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| text      | text       | null: false,                   |
+| user      | references | null: false, foreign_key: true |
+| product   | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :users
+- belongs_to :prototypes
