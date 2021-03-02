@@ -1,18 +1,20 @@
 # users テーブル
 
-| Column     | Type     | Options     |
-| ---------- | ------   | ----------- |
-| nickname   | string   | null: false |
-| email      | string   | null: false |
-| password   | string   | null: false |
-| last_name  | string   | null: false |
-| first_name | string   | null: false |
-| birthday   | datetime | null: false |
+| Column             | Type     | Options                       |
+| ------------------ | ------   | ----------------------------- |
+| nickname           | string   | null: false                   |
+| email              | string   | null: false, uniqueness: true |
+| encrypted_password | string   | null: false                   |
+| last_name          | string   | null: false                   |
+| first_name         | string   | null: false                   |
+| kana_last_name     | string   | null: false                   |
+| kana_first_name    | string   | null: false                   |
+| birthday           | datetime | null: false                   |
 
 ### Association
 
 - has_many :products
-- has_many :prototypes
+- has_many :comments
 
 ## products テーブル
 
@@ -23,20 +25,24 @@
 | category   | text       | null: false,                   |
 | status     | string     | null: false,                   |
 | user       | references | null: false, foreign_key: true |
+| buyer      | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :users
 - has_many   :comments
-- has_one    :delivers
+- has_one    :buyers
 
-## deliverys テーブル
+## buyers テーブル
 
-| Column | Type   | Options      |
-| ------ | ------ | ------------ |
-| fee    | string | null: false, | # integerかな？
-| area   | string | null: false, |
-| date   | string | null: false, | # datetimeかな？
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| delivery_fee  | string     | null: false,                   |
+| delivery_area | string     | null: false,                   |
+| delivery_date | string     | null: false,                   |
+| adders        | string     | null: false,                   |
+| buyer_name    | string     | null: false,                   |
+| product       | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -54,4 +60,4 @@
 ### Association
 
 - belongs_to :users
-- belongs_to :prototypes
+- belongs_to :products
