@@ -33,7 +33,7 @@
 ### Association
 
 - belongs_to :user
-- has_many :buys
+- has_one :buy
 
 ## deliverys テーブル
 
@@ -49,15 +49,12 @@
 
 ### Association
 
-- has_one :buy
+- belongs_to :buy
 
 ## buys テーブル
 
 | Column    | Type    | Options       |
 | --------- | ------- | ------------- |
-| credit    | integer | null: false,  |
-| period    | integer | null: false,  |
-| security  | integer | null: false,  |
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
 
@@ -65,4 +62,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :delivery
+- has_one :delivery
