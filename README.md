@@ -13,57 +13,53 @@
 
 ### Association
 
-- has_many :products
-- has_many :comments
-- has_many :purchase_managements
+- has_many :items
+- has_one :buy
 
-## products テーブル
+## items テーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| title         | string     | null: false,                   |
-| price         | integer    | null: false,                   |
-| category      | text       | null: false,                   |
-| status        | string     | null: false,                   |
-| delivery_fee  | string     | null: false,                   |
-| delivery_area | string     | null: false,                   |
-| delivery_date | string     | null: false,                   |
-| user          | references | null: false, foreign_key: true |
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| title            | string     | null: false,                   |
+| explanation      | text       | null: false,                   |
+| price            | integer    | null: false,                   |
+| category         | text       | null: false,                   |
+| state_id         | integer    | null: false,                   |
+| delivery_fee_id  | integer    | null: false,                   |
+| delivery_area_id | integer    | null: false,                   |
+| delivery_date_id | integer    | null: false,                   |
+| user             | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_many   :comments
-- has_one    :Purchase_management
+- belongs_to :user
+- belongs_to :buy
 
-## Purchase_managements テーブル
+## deliverys テーブル
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| postal_code  | text       | null: false,                   |
-| prefectures  | text       | null: false,                   |
-| municipality | text       | null: false,                   |
-| address      | text       | null: false,                   |
-| building     | text       | null: false,                   |
-| phone_number | text       | null: false,                   |
-| user         | references | null: false, foreign_key: true |
-| product      | references | null: false, foreign_key: true |
+| postal_code  | string     | null: false,                   |
+| prefectures  | text       | null: false,                   | #
+| municipality | string     | null: false,                   |
+| address      | string     | null: false,                   |
+| building     | string     |                                |
+| phone_number | string     | null: false,                   |
 
 ### Association
 
-- belongs_to :products
-- belongs_to :users
+- belongs_to :delivery
 
-## comments テーブル
+## buys テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| text      | text       | null: false,                   |
-| user      | references | null: false, foreign_key: true |
-| product   | references | null: false, foreign_key: true |
-
+| Column    | Type    | Options       |
+| --------- | ------- | ------------- |
+| credit    | integer | null: false,  |
+| period    | integer | null: false,  |
+| security  | integer | null: false,  |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :products
+- belongs_to :user
+- has_many   :item
+- belongs_to :delivery
