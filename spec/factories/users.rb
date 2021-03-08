@@ -8,10 +8,10 @@ FactoryBot.define do
     email                 {Faker::Internet.free_email}
     password              { '1a' + Faker::Internet.password(min_length: 6) }
     password_confirmation {password}
-    last_name             { person.last.kanji }#{Faker::Name.initials(number: 2)}
-    first_name            { person.first.kanji }#{Faker::Name.initials(number: 2)}
-    kana_last_name        { person.last.katakana }#{Faker::Name.initials(number: 2)}
-    kana_first_name       { person.first.katakana}#{Faker::Name.initials(number: 2)}
+    last_name             { person.last.kanji }
+    first_name            { person.first.kanji }
+    kana_last_name        { person.last.katakana }
+    kana_first_name       { person.first.katakana}
     birthday              {Faker::Date.backward}
 
   end
