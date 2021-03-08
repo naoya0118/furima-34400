@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  FULL_NAME = /\A[ぁ-んァ-ン一-龥々]+\z/
+  FULL_NAME = /\A[ぁ-んァ-ン一-龥々ー]+\z/
   KANA_NAME = /\A[ァ-ヶー－]+\z/
 
   with_options presence: true do
