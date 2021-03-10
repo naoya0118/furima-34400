@@ -16,6 +16,8 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :delivery_area_id
     validates :delivery_date_id
+    validates :category_id
+    validates :state_id
   end
 
   belongs_to :category
