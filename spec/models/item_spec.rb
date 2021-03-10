@@ -68,25 +68,50 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category is not a number")
       end
+      it "category_idが１だと登録できない" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
       it "state_idが空だと登録できない" do
         @item.state_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("State is not a number")
+      end
+      it "state_idが１だと登録できない" do
+        @item.state_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("State must be other than 1")
       end
       it "delivery_fee_idが空だと登録できない" do
         @item.delivery_fee_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee is not a number")
       end
-      it "delivery_area_idが空だと登録できない" do
-        @item.delivery_area_id = ''
+      it "delivery_fee_idが１だと登録できない" do
+        @item.delivery_fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery area is not a number")
+        expect(@item.errors.full_messages).to include("Delivery fee must be other than 1")
       end
       it "delivery_area_idが空だと登録できない" do
         @item.delivery_area_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery area is not a number")
+      end
+      it "delivery_area_idが１だと登録できない" do
+        @item.delivery_area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery area must be other than 1")
+      end
+      it "delivery_date_idが空だと登録できない" do
+        @item.delivery_date_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery date is not a number")
+      end
+      it "delivery_date_idが１だと登録できない" do
+        @item.delivery_date_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery date must be other than 1")
       end
       it "imageが空だと登録できない" do
         @item.image = nil
