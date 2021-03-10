@@ -53,6 +53,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
+      it "priceが全角文字では登録できないこと" do
+        @item.price = "あああああ"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it "priceが半角英数混合では登録できないこと" do
+        @item.price = "abc123"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
       it "category_idが空だと登録できない" do
         @item.category_id = ''
         @item.valid?
