@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   
   def index
-    #@delivery_fee = Item.find_by_name
     @items = Item.all
   end
 
