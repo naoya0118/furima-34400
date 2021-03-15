@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
 
   before_action :find_item, only: [:index, :create]
+  before_action :contributor_confirmation, only: [:index]
+  before_action :authenticate_user!, only: [:index]
 
   def index
     @order_delivery = OrderDelivery.new
@@ -16,7 +18,7 @@ class OrdersController < ApplicationController
       render :index
     end
   end
-
+  
   private
 
   def find_item
@@ -34,5 +36,9 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def contributor_confirmation
+    redirect_to root_path if current_user == @item.user
   end
 end
