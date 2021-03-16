@@ -8,12 +8,18 @@ RSpec.describe OrderDelivery, type: :model do
     @order_delivery = FactoryBot.build(:order_delivery,user_id: user.id,item_id: item.id)
     sleep(1)
   end
-
+   context '商品購入ができる時' do
     it "全ての情報があれば保存ができること" do
       expect(@order_delivery).to be_valid
     end
-
+    it "建物名が抜けていても登録できること" do
+      @order_delivery.building = ""
+      @order_delivery.valid?
+      expect(@order_delivery).to be_valid
+    end
+   end
   
+   context '商品購入ができない時' do
     it "tokenが空では登録できないこと" do
       @order_delivery.token = nil
       @order_delivery.valid?
@@ -28,6 +34,12 @@ RSpec.describe OrderDelivery, type: :model do
 
     it "postal_codeが半角数字以外では登録できないこと" do
       @order_delivery.postal_code = "aaa-aaaa"
+      @order_delivery.valid?
+      expect(@order_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    end
+
+    it "postal_codeがハイフンなしでは登録できないこと" do
+      @order_delivery.postal_code = "1234567"
       @order_delivery.valid?
       expect(@order_delivery.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
     end
@@ -68,5 +80,22 @@ RSpec.describe OrderDelivery, type: :model do
       expect(@order_delivery.errors.full_messages).to include("Phone number is invalid")
     end
 
+    it "phone_numberが12桁以上では登録できないこと" do
+      @order_delivery.phone_number = "090123456789"
+      @order_delivery.valid?
+      expect(@order_delivery.errors.full_messages).to include("Phone number is invalid")
+    end
+
+    it "user_idがないと登録できないこと" do
+      @order_delivery.user_id = nil
+      @order_delivery.valid?
+      expect(@order_delivery.errors.full_messages).to include("User can't be blank")
+    end
+    it "item_idがないと登録できないこと" do
+      @order_delivery.item_id = nil
+      @order_delivery.valid?
+      expect(@order_delivery.errors.full_messages).to include("Item can't be blank")
+    end
+   end
   end
 end
