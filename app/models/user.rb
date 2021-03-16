@@ -18,6 +18,6 @@ class User < ApplicationRecord
   end
 
   has_many :items
-  #has_many :buys
+  has_many :order
   
 end

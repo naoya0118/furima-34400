@@ -40,7 +40,7 @@
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | postal_code      | string     | null: false,                   |
-| delivery_area_id | integer    | null: false,                   | 
+| delivery_area_id | integer    | null: false,                   |
 | municipality     | string     | null: false,                   |
 | address          | string     | null: false,                   |
 | building         | string     |                                |
