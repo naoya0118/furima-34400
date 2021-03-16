@@ -39,6 +39,6 @@ class OrdersController < ApplicationController
   end
 
   def contributor_confirmation
-    redirect_to root_path if current_user == @item.user
+    redirect_to root_path if (current_user != @item.user) || (@item.order.present?)
   end
 end
